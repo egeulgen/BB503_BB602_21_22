@@ -21,7 +21,7 @@ log(2)
 getwd()
 
 # Set working directory
-setwd("/Users/egeulgen/Documents/Teaching/21_22_Undergrad/scripts")
+setwd("/Users/egeulgen/Documents/Teaching/BB503_BB602_21_22/")
 
 # special characters in R -------------------------------------------------s
 # NA: Not Available (i.e. missing values)
@@ -189,7 +189,7 @@ table(chol_vec)
 sort(table(chol_vec), decreasing = TRUE)
 
 # working with real data --------------------------------------------------
-aids_df <- read.delim("scripts/aids_dataset.txt", sep = " ")
+aids_df <- read.delim("data/aids_dataset.txt", sep = " ")
 
 head(aids_df)
 head(aids_df, 3)
