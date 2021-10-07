@@ -120,9 +120,25 @@ barplot(freq_tbl,
         xlab = "Eye-colour",
         ylab = "Frequency",
         main = "Bar-plot of the eye-colour data",
+        col = "red")
+
+barplot(freq_tbl, 
+        xlab = "Eye-colour",
+        ylab = "Frequency",
+        main = "Bar-plot of the eye-colour data",
         col = c("blue", "brown", "green"))
 
+barplot(freq_tbl, 
+        xlab = "Eye-colour",
+        ylab = "Frequency",
+        main = "Bar-plot of the eye-colour data",
+        col = c("blue", "brown", "green"),
+        horiz = TRUE)
+
+?barplot
+
 ###  histogram of weight
+?hist
 hist(weight)
 hist(weight, freq = FALSE)
 hist(weight, breaks = 10)
@@ -173,9 +189,12 @@ table(chol_vec)
 sort(table(chol_vec), decreasing = TRUE)
 
 # working with real data --------------------------------------------------
-aids_df <- read.delim("aids_dataset.txt", sep = " ")
+aids_df <- read.delim("scripts/aids_dataset.txt", sep = " ")
 
 head(aids_df)
+head(aids_df, 3)
+
+tail(aids_df)
 
 str(aids_df)
 aids_df$treatment <- as.factor(aids_df$treatment)
@@ -190,7 +209,6 @@ summary(aids_df)
 table(aids_df$treatment)
 table(aids_df$treatment) / nrow(aids_df) * 100
 
-sub_df1 <- aids_df[aids_df$treatment == "trt1", ]
 sub_df1 <- subset(aids_df, treatment == "trt1")
 sub_df2 <- subset(aids_df, treatment == "trt2")
 
