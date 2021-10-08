@@ -1,0 +1,229 @@
+---
+title: "BB503/BB602 - R Training - Week II"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Introduction
+
+This week, we will be working with the AIDS data set[^1]. Let's start by reading the data. Notice that we had to specify that the separator (via the `sep` argument) is spaces (instead of the default of `read.delim()` which is tabs).
+
+[^1]: Source: Applied longitudinal analysis [Internet]. [cited 2021 Sep 27]. Available from: <https://content.sph.harvard.edu/fitzmaur/ala2e/>
+
+```{r read}
+aids_df <- read.delim("../data/aids_dataset.txt", sep = " ")
+```
+
+For any function in R, we can use `?function_name` to view the help page for that function:
+
+```{r help}
+?read.delim
+```
+
+We can view the first 6 (by default) lines using the function `head()` and, similarly, the last lines using the `tail()` function:
+
+```{r head_tail}
+head(aids_df)
+
+# print first 2 lines
+head(aids_df, 2)
+
+tail(aids_df)
+```
+
+Using `str()`, we can display the structure of our data frame `aids_df`. For later use, we turn the variables `treatment` and `gender` into factors.
+
+```{r str}
+str(aids_df)
+aids_df$treatment <- as.factor(aids_df$treatment)
+aids_df$gender <- as.factor(aids_df$gender)
+str(aids_df)
+```
+
+# Examining Distributions
+
+## Mean/Median/Mode
+
+We can inspect the mean of a vector using the function `mean()`:
+
+```{r mean}
+# mean of age
+mean(aids_df$age)
+
+# mean of CD4 count at week 1
+mean(aids_df$cd4_1)
+```
+
+Similarly, we can calculate the median of a vector using the function `median()` :
+
+```{r median}
+# median of CD4 count at week 2
+median(aids_df$cd4_2)
+```
+
+Mode can be calculated using the function `table()` (calculates the frequency of each value):
+
+```{r mode}
+tbl <- table(aids_df$cd4_1)
+sort(tbl, decreasing = TRUE)
+```
+
+## Quantiles
+
+For calculating quantiles given a variable (a vector), we use the `quantile()` function:
+
+```{r quantile}
+# 10th, 25th, 33rd and 78th percentiles of age
+quantile(aids_df$age, probs = c(0.1, 0.25, 0.33, 0.78))
+```
+
+By default, R uses "type 7" out of the 9 available algorithms for calculating quantiles. We can change this by altering the `type` argument:
+
+```{r quantile2}
+# 10th, 25th, 33rd and 78th percentiles of age - type 2
+quantile(aids_df$age, probs = c(0.1, 0.25, 0.33, 0.78), type = 2)
+```
+
+## Spread
+
+### Range
+
+```{r range}
+# range of CD4 counts at week 1
+max(aids_df$cd4_1) - min(aids_df$cd4_1)
+```
+
+### Inter-quantile range
+
+```{r IQR}
+### IQR of CD4 counts at week 1
+# calculate Q1 and Q3
+quantile(aids_df$cd4_1, probs = c(0.25, 0.75))
+
+# IQR = Q3 - Q1
+36 - 11
+```
+
+alternatively:
+
+```{r IQR2}
+IQR(aids_df$cd4_1)
+```
+
+### Variance and standard deviation
+
+```{r var_sd}
+# Variance of CD4 counts at week 1
+var(aids_df$cd4_1)
+
+# Std. deviation of CD4 counts at week 1
+sqrt(var(aids_df$cd4_1))
+sd(aids_df$cd4_1)
+```
+
+## Outliers
+
+We can manually determine outliers in a variable using the definition provided in the slides.
+
+```{r outliers}
+### Outliers for CD4 counts at weeek 1
+Q1 <- quantile(aids_df$cd4_1, 0.25)
+Q3 <- quantile(aids_df$cd4_1, 0.75)
+
+IQR_val <- IQR(aids_df$cd4_1)
+
+UL <- Q3 + 1.5 * IQR_val
+LL <- Q1 - 1.5 * IQR_val
+
+cond <- aids_df$cd4_1 > UL | aids_df$cd4_1 < LL
+aids_df$cd4_1[cond]
+```
+
+We can visualize the boxplot of this variable to see the outlier values:
+
+```{r boxplot}
+boxplot(aids_df$cd4_1)
+```
+
+Using the function `boxplot.stats()`, to gather and display the statistics necessary for producing box plots, including outliers.
+
+```{r boxplot_stats}
+boxplot.stats(aids_df$cd4_1)
+```
+
+## The `summary()` function
+
+```{r summary}
+summary(aids_df$cd4_1)
+
+summary(aids_df)
+```
+
+## The "improved" summary function
+
+```{r new_summary}
+new_summary <- function(x){ 
+    out <- list(
+        min = min(x),
+        max = max(x),
+        quants = quantile(x, prob = c(0.1, 0.25, 0.5, 0.75, 0.9),
+                          type = 2),
+        mean    = mean(x),
+        var     = var(x),
+        std_dev = sd(x),
+        length  = length(x)
+    )
+  class(out) <- "new_summary"
+  return(out) 
+}
+
+print.new_summary <- function(object, ...){
+    cat("Min:", object$min, "\n")
+    cat("10th percentile:", object$quants[1], "\n")
+    cat("25th percentile:", object$quants[2], "\n")
+    cat("50th percentile (median):", object$quants[3], "\n")
+    cat("Mean:", object$mean, "\n")
+    cat("75th percentile:", object$quants[4], "\n")
+    cat("90th percentile:", object$quants[5], "\n")
+    cat("Max:", object$max, "\n")
+    cat("Var:", object$var, "\n")
+    cat("Sd:", object$std_dev, "\n")
+    cat("Length:", object$length, "\n")
+}
+```
+
+Examples:
+
+```{r new_summary2}
+new_summary(aids_df$cd4_1)
+new_summary(aids_df[aids_df$treatment == "trt1", "cd4_1"])
+new_summary(aids_df[aids_df$treatment == "trt2", "cd4_1"])
+new_summary(aids_df[aids_df$treatment == "trt3", "cd4_1"])
+new_summary(aids_df[aids_df$treatment == "trt4", "cd4_1"])
+```
+
+# Examining Relationships
+
+## Scatter plots
+
+Age vs. baseline (week 1) CD4 cell counts:
+
+```{r scattter}
+plot(aids_df$age, aids_df$cd4_1)
+plot(cd4_1 ~ age, aids_df)
+```
+
+## Correlation
+
+### Pearson Correlation
+
+```{r pearson}
+cor(aids_df$age, aids_df$cd4_1)
+```
+
+### Spearman's Rank Correlation
+
+```{r spearman}
+cor(aids_df$age, aids_df$cd4_1, method = "spearman")
+```
