@@ -92,6 +92,7 @@ quantile(aids_df$age, probs = c(0.1, 0.25, 0.33, 0.78), type = 2)
 ```{r range}
 # range of CD4 counts at week 1
 max(aids_df$cd4_1) - min(aids_df$cd4_1)
+range(aids_df$cd4_1)
 ```
 
 ### Inter-quantile range
@@ -109,6 +110,7 @@ alternatively:
 
 ```{r IQR2}
 IQR(aids_df$cd4_1)
+IQR(aids_df$cd4_1, type = 2)
 ```
 
 ### Variance and standard deviation
@@ -137,6 +139,8 @@ UL <- Q3 + 1.5 * IQR_val
 LL <- Q1 - 1.5 * IQR_val
 
 cond <- aids_df$cd4_1 > UL | aids_df$cd4_1 < LL
+table(cond)
+which(cond)
 aids_df$cd4_1[cond]
 ```
 
@@ -144,6 +148,7 @@ We can visualize the boxplot of this variable to see the outlier values:
 
 ```{r boxplot}
 boxplot(aids_df$cd4_1)
+boxplot(aids_df$cd4_1, horizontal = TRUE)
 ```
 
 Using the function `boxplot.stats()`, to gather and display the statistics necessary for producing box plots, including outliers.
@@ -219,6 +224,7 @@ plot(cd4_1 ~ age, aids_df)
 ### Pearson Correlation
 
 ```{r pearson}
+?cor
 cor(aids_df$age, aids_df$cd4_1)
 ```
 
@@ -226,4 +232,10 @@ cor(aids_df$age, aids_df$cd4_1)
 
 ```{r spearman}
 cor(aids_df$age, aids_df$cd4_1, method = "spearman")
+```
+
+### Correlation Test
+
+```{r cor_test}
+cor.test(aids_df$age, aids_df$cd4_1, method = "spearman")
 ```
