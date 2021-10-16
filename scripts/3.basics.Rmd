@@ -1,0 +1,255 @@
+---
+title: "BB503/BB602 - R Training - Week III"
+author: "Ege Ulgen"
+output: 
+    html_document:
+        df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R tips
+
+-   If you can't figure out how to solve an issue, Google is your friend. e.g., "how to calculate mode r"
+
+-   If you need help with the usage of a function, type `?function_name`. e.g. `?quantile`
+
+-   If you get an error, and cannot fix it. C/P the error into Google. Someone else most likely had a similar problem
+
+-   Some resources you might want to follow:
+
+    -   R-Bloggers - <https://www.r-bloggers.com/>
+
+    -   STHDA - <http://www.sthda.com/english/>
+
+    -   Quick-R - <https://www.statmethods.net/>
+
+# R Basics
+
+## Conditional Statements
+
+```{r cond0}
+### simple conditional (Boolean) statements
+3 == 3
+3 == 4
+3 != 4
+3 > 4
+3 <= 4
+
+5 %% 3 == 0
+5 %% 3 == 2
+
+### multiple conditions
+# and
+3 == 3 & 3 > 4
+# or
+3 == 3 | 3 > 4
+# > 2 conditions
+3 == 3 | (3 > 4 & 5 != 6)
+
+!TRUE
+
+
+```
+
+We can use this conditions to selectively execute commands when these condition(s) are met:
+
+```{r cond1}
+# after a complex calculation X becomes 3
+x <- 3
+
+if (x == 3) {
+    print("x is equal to 3")
+    # other commands that should be executed if the statement is true go here
+}
+```
+
+Using `else if` we can add even more conditions:
+
+```{r cond2}
+# after a complex calculation X becomes 5
+x <- 5
+
+if (x == 3) {
+    print("x is equal to 3")
+    # other commands that should be executed if this first statement is true go here
+} else if (x > 3) {
+    print("x is greater than 3")
+    # other commands that should be executed if this second statement is true go here
+}
+```
+
+Finally, using else we can execute any commands if none of the conditions are met:
+
+```{r cond3}
+# after a complex calculation X becomes 1
+x <- 1
+
+if (x == 3) {
+    print("x is equal to 3")
+    # other commands that should be executed if this first statement is true go here
+} else if (x > 3) {
+    print("x is greater than 3")
+    # other commands that should be executed if this second statement is true go here
+} else {
+    print("x is less than 3")
+    # other commands that should be executed if no condition is true go here
+}
+```
+
+## Loops
+
+We may wish to execute certain commands repeatedly until a certain condition is met. For this purpose, we can use a `while` loop:
+
+```{r while}
+# initialize
+current_number <- 1
+while(current_number <= 10) {
+    # execute any commands
+    print(paste("Current #:", current_number))
+    # update
+    current_number <- current_number + 1
+}
+```
+
+We may wish to execute certain commands repeatedly for a set amount of times. For this purpose, we can use a `for` loop:
+
+```{r for}
+for (i in 1:10) {
+    # execute any commands
+    print(paste("Current #:", i))
+}
+```
+
+## Putting it all together - The Fizz Buzz Game
+
+Fizz buzz is a group word game for children to teach them about division. Players take turns to count incrementally,
+
+-   replacing any number divisible by 3 with the word "fizz"
+
+-   replacing any number divisible by 5 with the word "buzz"
+
+```{r fizzbuzz}
+for (i in 1:100) {
+    if (i %% 3 == 0) {
+        print("Fizz")
+    } else if (i %% 5 == 0) {
+        print("Buzz")
+    } else {
+        print(i)
+    }
+}
+```
+
+For a variation of the game, any number divisible by both 3 and 5 is replaced with the word "fizzbuzz"
+
+```{r fizzbuzz2}
+for (i in 1:100) {
+    if (i %% 3 == 0 & i %% 5 == 0) {
+        print("FizzBuzz")
+    } else if (i %% 3 == 0) {
+        print("Fizz")
+    } else if (i %% 5 == 0) {
+        print("Buzz")
+    } else {
+        print(i)
+    }
+}
+```
+
+## Functions
+
+Functions are modules of code that accomplish a specific task. They take in data, process it, and return a result.
+
+The exponentiation function $f(x,y)=x^y$ can be coded in R as:
+
+```{r power}
+pow <- function(x, y) {
+    output <- x ^ y
+    return(output)
+}
+```
+
+E.g., $f(2,3)=2^3=8$:
+
+```{r power2}
+pow(2, 3)
+```
+
+Here,
+
+-   `pow` is the name of the function, and it is arbitrary
+
+-   `function(...)` is for defining any function in R
+
+-   `x` and `y` are input names (arguments), and names are arbitrary
+
+-   `output` is the object that stores the result (not created globally)
+
+-   `return` is the function for outputting the result
+
+We may define default values for the arguments:
+
+```{r power3}
+pow2 <- function(x, y = 2) {
+    output <- x ^ y
+    return(output)
+}
+pow2(3)
+pow2(3, 3)
+```
+
+## Another Solution for Fizz-Buzz
+
+```{r fizzbuzz_func}
+fizz_buzz <- function(number) {
+    if (number %% 3 == 0 & number %% 5 == 0) {
+        return("FizzBuzz")
+    }
+    
+    if (number %% 3 == 0) {
+        return("Fizz")
+    }
+    
+    if (number %% 5 == 0) {
+        return("Buzz")
+    }
+    return(number)
+}
+
+fizz_buzz(2)
+fizz_buzz(3)
+fizz_buzz(5)
+fizz_buzz(15)
+
+sapply(1:100, fizz_buzz)
+?sapply
+```
+
+# Probability
+
+## Basic Simulation - Flipping a fair coin
+
+```{r simul1}
+# by this you get the same answer all the time
+set.seed(321)
+
+# number of trials
+n <- 5000
+
+# tossing coins
+results <- c() # to store results
+average_at_i <- c() # to store averages (will approximate 0.5)
+for (i in 1:n) {
+    current_res <- sample(c(0, 1), 1)
+    results <- c(results, current_res)
+    average_at_i <- c(average_at_i, mean(results))
+}
+
+# plot resulting averages by each trial
+plot(average_at_i, xlab = "Trial number", ylab = "Proportion of 1s")
+plot(average_at_i, xlab = "Trial number", ylab = "Proportion of 1s", type = "l")
+abline(h = 0.5, col = "red")
+```
