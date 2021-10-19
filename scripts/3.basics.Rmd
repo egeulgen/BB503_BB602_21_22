@@ -18,6 +18,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 -   If you get an error, and cannot fix it. C/P the error into Google. Someone else most likely had a similar problem
 
+-   Some resources for learning the basic syntax of R;
+
+    -   Codecademy - <https://www.codecademy.com/learn/learn-r>
+
+    -   Dataquest - <https://www.dataquest.io/course/introduction-to-data-analysis-in-r/>
+
+    -   R for Data Science - <https://r4ds.had.co.nz/index.html>
+
+-   Interesting read: <https://www.dataquest.io/blog/learn-r-for-data-science/>
+
 -   Some resources you might want to follow:
 
     -   R-Bloggers - <https://www.r-bloggers.com/>
