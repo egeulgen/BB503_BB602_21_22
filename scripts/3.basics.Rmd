@@ -238,6 +238,31 @@ sapply(1:100, fizz_buzz)
 ?sapply
 ```
 
+## The `apply` family of functions
+
+```{r apply}
+mat <- matrix(rnorm(30), nrow = 5, ncol = 6)
+sample_types <- c("Tumor", "Tumor", "Tumor", "Control", "Control")
+
+?apply
+# apply mean to each row
+apply(mat, 1, mean)
+
+# apply sd to each column
+apply(mat, 2, sd)
+```
+
+```{r sapply}
+# Apply a function over a list or vector
+sapply(mat[1, ], function(x) x^3)
+```
+
+```{r tapply}
+# Apply a function over a ragged array
+# mean values of 1st variable per sample type
+tapply(mat[, 1], sample_types, mean)
+```
+
 # Probability
 
 ## Basic Simulation - Flipping a fair coin

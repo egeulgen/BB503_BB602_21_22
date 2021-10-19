@@ -601,6 +601,27 @@ fizz_buzz(2)</code></pre>
 ##  [97] &quot;97&quot;       &quot;98&quot;       &quot;Fizz&quot;     &quot;Buzz&quot;</code></pre>
 <pre class="r"><code>?sapply</code></pre>
 </div>
+<div id="the-apply-family-of-functions" class="section level2">
+<h2>The <code>apply</code> family of functions</h2>
+<pre class="r"><code>mat &lt;- matrix(rnorm(30), nrow = 5, ncol = 6)
+sample_types &lt;- c(&quot;Tumor&quot;, &quot;Tumor&quot;, &quot;Tumor&quot;, &quot;Control&quot;, &quot;Control&quot;)
+
+?apply
+# apply mean to each row
+apply(mat, 1, mean)</code></pre>
+<pre><code>## [1]  0.015569  0.323636  0.688603  0.411600 -0.229736</code></pre>
+<pre class="r"><code># apply sd to each column
+apply(mat, 2, sd)</code></pre>
+<pre><code>## [1] 1.25624 1.17891 1.13091 0.35839 1.04163 0.99951</code></pre>
+<pre class="r"><code># Apply a function over a list or vector
+sapply(mat[1, ], function(x) x^3)</code></pre>
+<pre><code>## [1]  7.9260e-01 -5.9617e-01  5.1888e-01  8.2610e-02 -1.8443e+00 -3.1024e-08</code></pre>
+<pre class="r"><code># Apply a function over a ragged array
+# mean values of 1st variable per sample type
+tapply(mat[, 1], sample_types, mean)</code></pre>
+<pre><code>##  Control    Tumor 
+##  0.38912 -0.22897</code></pre>
+</div>
 </div>
 <div id="probability" class="section level1">
 <h1>Probability</h1>
