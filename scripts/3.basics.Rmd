@@ -1,9 +1,7 @@
 ---
 title: "BB503/BB602 - R Training - Week III"
 author: "Ege Ulgen"
-output: 
-    html_document:
-        df_print: paged
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
