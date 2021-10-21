@@ -20,6 +20,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
     -   Codecademy - <https://www.codecademy.com/learn/learn-r>
 
+    -   RStudio Cloud Primers - <https://rstudio.cloud/learn/primers>
+
     -   Dataquest - <https://www.dataquest.io/course/introduction-to-data-analysis-in-r/>
 
     -   R for Data Science - <https://r4ds.had.co.nz/index.html>
@@ -62,7 +64,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-We can use this conditions to selectively execute commands when these condition(s) are met:
+We can use these conditions to selectively execute commands when these condition(s) are met:
 
 ```{r cond1}
 # after a complex calculation X becomes 3
