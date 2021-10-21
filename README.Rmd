@@ -1,0 +1,25 @@
+---
+title: "BB503/BB602 - Probability & Statististics - Fall 2021"
+output: github_document
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r schedule, echo=FALSE}
+suppressMessages(sched_df <- readxl::read_excel("misc/grad_lectures.xlsx"))
+
+sched_df$Slides <- sched_df$`R script` <- NULL
+colnames(sched_df)[4] <- "HW"
+sched_df$HW[is.na(sched_df$HW)] <- ""
+
+
+sched_df$Subject[1] <- kableExtra::cell_spec(sched_df$Subject[1], "html", link = "https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/1.descriptive.pdf")
+sched_df$Subject[2] <- kableExtra::cell_spec(sched_df$Subject[2], "html", link = "https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/2.descriptive.pdf")
+sched_df$Subject[3] <- kableExtra::cell_spec(sched_df$Subject[3], "html", link = "https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/3.probability.pdf")
+
+kableExtra::row_spec(kableExtra::row_spec(knitr::kable(sched_df, format = "html", escape = FALSE), which(grepl("MT", sched_df$Subject)), bold = TRUE, background = "#F4B41A"), nrow(sched_df), bold = TRUE, background = "#E2725A")
+
+```
