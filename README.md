@@ -94,7 +94,7 @@ Continuous Distributions
 2021-11-11
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #F4B41A !important;">
-MT1
+Midterm Exam 1
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #F4B41A !important;">
 </td>
@@ -147,7 +147,7 @@ HW2
 2021-12-09
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #F4B41A !important;">
-MT2
+Midterm Exam 2
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #F4B41A !important;">
 </td>
@@ -200,7 +200,7 @@ HW3
 2022-01-06
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #E2725A !important;">
-Final
+Final Exam
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #E2725A !important;">
 </td>
