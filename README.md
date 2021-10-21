@@ -57,7 +57,7 @@ HW
 conditional probability, Bayes theorem</a>
 </td>
 <td style="text-align:left;">
-HW1
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/Homeworks/HW1.pdf" style="     ">HW1</a>
 </td>
 </tr>
 <tr>
