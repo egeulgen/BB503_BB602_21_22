@@ -68,7 +68,8 @@ conditional probability, Bayes theorem</a>
 2021-10-28
 </td>
 <td style="text-align:left;">
-Discrete Distributions
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/4.discrete_distributions.pdf" style="     ">Discrete
+Distributions</a>
 </td>
 <td style="text-align:left;">
 </td>
