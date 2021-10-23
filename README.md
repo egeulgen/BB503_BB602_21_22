@@ -108,7 +108,7 @@ Midterm Exam 1
 2021-11-18
 </td>
 <td style="text-align:left;">
-MLE, LLN, CLT, Hypothesis tests
+MLE, LLN, CLT / Hypothesis tests I
 </td>
 <td style="text-align:left;">
 </td>
@@ -121,7 +121,7 @@ MLE, LLN, CLT, Hypothesis tests
 2021-11-25
 </td>
 <td style="text-align:left;">
-Hypothesis tests
+Hypothesis tests II
 </td>
 <td style="text-align:left;">
 </td>
@@ -134,7 +134,7 @@ Hypothesis tests
 2021-12-02
 </td>
 <td style="text-align:left;">
-Hypothesis tests, Multiple testing correction
+Hypothesis tests III / Multiple testing correction
 </td>
 <td style="text-align:left;">
 HW2
@@ -161,7 +161,7 @@ Midterm Exam 2
 2021-12-16
 </td>
 <td style="text-align:left;">
-Sampling methods, Missing data, Linear regression
+Sampling methods, Missing data / Linear regression
 </td>
 <td style="text-align:left;">
 </td>
@@ -187,7 +187,7 @@ Generalized linear models
 2021-12-30
 </td>
 <td style="text-align:left;">
-Computational methods
+Resampling Methods
 </td>
 <td style="text-align:left;">
 HW3
