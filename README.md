@@ -14,6 +14,9 @@ Date
 Subject
 </th>
 <th style="text-align:left;">
+R
+</th>
+<th style="text-align:left;">
 HW
 </th>
 </tr>
@@ -30,6 +33,9 @@ HW
 <a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/1.descriptive.pdf" style="     ">Descriptive</a>
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/1.intro.R" style="     ">intro</a>
+</td>
+<td style="text-align:left;">
 </td>
 </tr>
 <tr>
@@ -41,6 +47,9 @@ HW
 </td>
 <td style="text-align:left;">
 <a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/2.descriptive.pdf" style="     ">Descriptive</a>
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/2.EDA.html" style="     ">EDA</a>
 </td>
 <td style="text-align:left;">
 </td>
@@ -55,6 +64,9 @@ HW
 <td style="text-align:left;">
 <a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/3.probability.pdf" style="     ">Probability,
 conditional probability, Bayes theorem</a>
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/3.basics.Rmd" style="     ">basics</a>
 </td>
 <td style="text-align:left;">
 <a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/Homeworks/HW1.pdf" style="     ">HW1</a>
@@ -72,6 +84,10 @@ conditional probability, Bayes theorem</a>
 Distributions</a>
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/4.discrete_distr.pdf" style="     ">discrete
+RV</a>
+</td>
+<td style="text-align:left;">
 </td>
 </tr>
 <tr>
@@ -83,6 +99,8 @@ Distributions</a>
 </td>
 <td style="text-align:left;">
 Continuous Distributions
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
@@ -99,6 +117,8 @@ Midterm Exam 1
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #F4B41A !important;">
 </td>
+<td style="text-align:left;font-weight: bold;background-color: #F4B41A !important;">
+</td>
 </tr>
 <tr>
 <td style="text-align:right;">
@@ -109,6 +129,8 @@ Midterm Exam 1
 </td>
 <td style="text-align:left;">
 MLE, LLN, CLT / Hypothesis tests I
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
@@ -125,6 +147,8 @@ Hypothesis tests II
 </td>
 <td style="text-align:left;">
 </td>
+<td style="text-align:left;">
+</td>
 </tr>
 <tr>
 <td style="text-align:right;">
@@ -135,6 +159,8 @@ Hypothesis tests II
 </td>
 <td style="text-align:left;">
 Hypothesis tests III / Multiple testing correction
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 HW2
@@ -152,6 +178,8 @@ Midterm Exam 2
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #F4B41A !important;">
 </td>
+<td style="text-align:left;font-weight: bold;background-color: #F4B41A !important;">
+</td>
 </tr>
 <tr>
 <td style="text-align:right;">
@@ -162,6 +190,8 @@ Midterm Exam 2
 </td>
 <td style="text-align:left;">
 Sampling methods, Missing data / Linear regression
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 </td>
@@ -178,6 +208,8 @@ Generalized linear models
 </td>
 <td style="text-align:left;">
 </td>
+<td style="text-align:left;">
+</td>
 </tr>
 <tr>
 <td style="text-align:right;">
@@ -188,6 +220,8 @@ Generalized linear models
 </td>
 <td style="text-align:left;">
 Resampling Methods
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 HW3
@@ -202,6 +236,8 @@ HW3
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #E2725A !important;">
 Final Exam
+</td>
+<td style="text-align:left;font-weight: bold;background-color: #E2725A !important;">
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #E2725A !important;">
 </td>
