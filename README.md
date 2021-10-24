@@ -33,7 +33,7 @@ HW
 <a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/1.descriptive.pdf" style="     ">Descriptive</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/1.intro.R" style="     ">intro</a>
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/1.intro.R" style="     ">Intro</a>
 </td>
 <td style="text-align:left;">
 </td>
@@ -66,7 +66,7 @@ HW
 conditional probability, Bayes theorem</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/3.basics.Rmd" style="     ">basics</a>
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/3.basics.Rmd" style="     ">Basics</a>
 </td>
 <td style="text-align:left;">
 <a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/Homeworks/HW1.pdf" style="     ">HW1</a>
@@ -84,7 +84,7 @@ conditional probability, Bayes theorem</a>
 Distributions</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/4.discrete_distr.pdf" style="     ">discrete
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/4.discrete_distr.pdf" style="     ">Discrete
 RV</a>
 </td>
 <td style="text-align:left;">

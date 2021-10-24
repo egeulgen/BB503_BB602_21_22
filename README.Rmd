@@ -35,10 +35,10 @@ sched_df$Subject[4] <- link_to_file(sched_df$Subject[4], "lectures/4.discrete_di
 
 # links to R exercises
 sched_df$R <- ""
-sched_df$R[1] <- link_to_file("intro", "scripts/1.intro.R")
+sched_df$R[1] <- link_to_file("Intro", "scripts/1.intro.R")
 sched_df$R[2] <- link_to_file("EDA", "scripts/2.EDA.html")
-sched_df$R[3] <- link_to_file("basics", "scripts/3.basics.Rmd")
-sched_df$R[4] <- link_to_file("discrete RV", "scripts/4.discrete_distr.pdf")
+sched_df$R[3] <- link_to_file("Basics", "scripts/3.basics.Rmd")
+sched_df$R[4] <- link_to_file("Discrete RV", "scripts/4.discrete_distr.pdf")
 
 sched_df <- sched_df[, c(1:3, 5, 4)]
 
