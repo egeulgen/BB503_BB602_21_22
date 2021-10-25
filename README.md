@@ -189,7 +189,7 @@ Midterm Exam 2
 2021-12-16
 </td>
 <td style="text-align:left;">
-Sampling methods, Missing data / Linear regression
+Power Analysis, Missing data / Linear regression
 </td>
 <td style="text-align:left;">
 </td>
