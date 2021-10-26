@@ -49,7 +49,7 @@ HW
 <a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/2.descriptive.pdf" style="     ">Descriptive</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/2.EDA.html" style="     ">EDA</a>
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/2.EDA.pdf" style="     ">EDA</a>
 </td>
 <td style="text-align:left;">
 </td>
@@ -66,7 +66,7 @@ HW
 conditional probability, Bayes theorem</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/3.basics.Rmd" style="     ">Basics</a>
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/3.basics.pdf" style="     ">Basics</a>
 </td>
 <td style="text-align:left;">
 <a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/Homeworks/HW1.pdf" style="     ">HW1</a>
