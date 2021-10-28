@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r die_roll}
 ### simulating 10000 die rolls
 set.seed(123)
-n_rolls <- 10000
+n_rolls <- 100000
 results <- sample(1:6, n_rolls, replace = TRUE)
 
 # pmf = 1/6 = 0.16667
@@ -47,7 +47,6 @@ plot(x, cdf_vals, type = "o")
 # q** is the quantile function
 probs <- seq(0, 1, by = 0.01)
 quantiles <- qbern(probs, prob = 0.7)  
-plot(probs, quantiles, type = "o")
 
 # r** is the random number generator (random numbers that follow the given distribution)
 rbern_numbers <- rbern(1000, prob = 0.7)
@@ -74,7 +73,7 @@ plot(x, cdf_vals, type = "o")
 # q** is the quantile function
 probs <- seq(0, 1, by = 0.01)
 quantiles <- qbinom(probs, size = 10, prob = 0.7)  
-plot(probs, quantiles, type = "o")
+quantiles
 
 # r** is the random number generator (random numbers that follow the given distribution)
 rbinom_numbers <- rbinom(10000000, size = 10, prob = 0.7)
@@ -99,6 +98,7 @@ pbinom(q = 4, size = 12, prob = 0.2)
 
 # c) what is the probability that the treatment is succcessfull in at least 4?
 1 - pbinom(q = 3, size = 12, prob = 0.2)
+
 pbinom(q = 4 - 1, size = 12, prob = 0.2, lower.tail = FALSE)
 ```
 
@@ -125,7 +125,7 @@ Let's determine the number of operations we would expect to be performed until a
 
 ## Hypergeometric Distribution
 
-Suppose we are performing an RNA array experiment that targets 20000 genes in total. We find that 75 genes are important (e.g., deferentially expressed between tumors vs. controls). We find that 60 of the important genes are in a functional gene set (e.g., Cell cycle) of 1000 genes.
+Suppose we are performing an RNA array experiment that targets 20000 genes in total. We find that 75 genes are important (e.g., differentially expressed between tumors vs. controls). We find that 60 of the important genes are in a functional gene set (e.g., Cell cycle) of 1000 genes.
 
 ```{r hypergeom}
 ### Over Representation Analysis
@@ -165,5 +165,6 @@ dpois(x = 0, lambda = 4)
 
 # b) the probability that at least 2 people die from the disease
 1 - (dpois(1, 4) + dpois(0, 4))
+
 ppois(2 - 1, 4, lower.tail = FALSE)
 ```
