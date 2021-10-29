@@ -1,0 +1,91 @@
+---
+title: "BB503/BB602 - R Training - Week V"
+author: "Ege Ulgen"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Continuous Distributions
+
+## Continuous Uniform Distribution
+
+```{r unif}
+# Continuous Uniform Distribution [1, 10]
+
+# d** returns the density 
+x <- seq(0, 15, 0.1)
+y <- dunif(x, min = 1, max = 10)
+plot(x, y, type = "l")
+
+# p** is the CDF (P(X<=x))
+cdf_vals <- punif(x, min = 1, max = 10)
+plot(x, cdf_vals, type = "l")
+
+# q** is the quantile function
+qunif(0.5, min = 1, max = 10)
+
+# r** is the random number generator (random numbers that follow the given distribution)
+runif(10, min = 1, max = 10)
+```
+
+## Exponential Distribution
+
+```{r exp1}
+# d** returns the density 
+x <- seq(-2, 5, 0.1)
+y <- dexp(x, rate = 1)
+plot(x, y, type = "l")
+
+# the effect of changing rate
+x <- seq(0, 5, 0.1)
+
+plot(x, dexp(x, rate = 1), type = "l")
+lines(x, dexp(x, rate = 5), col = "orange")
+lines(x, dexp(x, rate =.5), col = "blue")
+```
+
+The time between heart beats is measured in milliseconds (msec) and is called an "R-R interval" or "inter-beat interval (IBI)". Assume that mean IBI is 975 msec. (Thus the rate is 1 / 0.975 sec = 1.0256 Hz)
+
+```{r exp2}
+rate <- 1 / .975
+plot(seq(0, 5, 0.01), dexp(seq(0, 5, 0.01), rate = rate), type = "l", xlab = "x", ylab = "P(X=x)")
+```
+
+What is the probability that the time between two heart beats is longer than 2 seconds?
+
+```{r exp3}
+1 - pexp(2, rate)
+pexp(2, rate = rate, lower.tail = FALSE)
+```
+
+## Normal Distribution
+
+In a cardiology deparment, it is known that the systolic blood pressure (SBP) is distributed normally with a mean of 150 and a variance of 90. 
+
+```{r norm1}
+x <- seq(100, 200, 0.01)
+plot(x, dnorm(x, mean = 150, sd = sqrt(90)), type = "l", xlab = "x", ylab = "P(X=x)")
+```
+
+For a randomly-selected patient:
+
+a) What is the probability that their SBP is less than 110?
+
+```{r norm_a}
+pnorm(110, mean = 150, sd = sqrt(90))
+```
+
+b) What is the probability that their SBP is more than 120? 
+
+```{r norm_b}
+pnorm(120, mean = 150, sd = sqrt(90), lower.tail = FALSE)
+```
+
+c) What is the probability that their SBP is between 90 and 160? 
+
+```{r norm_c}
+pnorm(160, mean = 150, sd = sqrt(90)) - pnorm(90, mean = 150, sd = sqrt(90))
+```
