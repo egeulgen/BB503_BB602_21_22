@@ -98,9 +98,12 @@ RV</a>
 2021-11-04
 </td>
 <td style="text-align:left;">
-Continuous Distributions
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/5.continuous_distributions.pdf" style="     ">Continuous
+Distributions</a>
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/5.cont_distr.pdf" style="     ">Cont.
+RV</a>
 </td>
 <td style="text-align:left;">
 </td>
