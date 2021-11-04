@@ -28,6 +28,7 @@ plot(x, cdf_vals, type = "l")
 qunif(0.5, min = 1, max = 10)
 
 # r** is the random number generator (random numbers that follow the given distribution)
+set.seed(123)
 runif(10, min = 1, max = 10)
 ```
 
