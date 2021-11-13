@@ -131,9 +131,11 @@ Midterm Exam 1
 2021-11-18
 </td>
 <td style="text-align:left;">
-MLE, LLN, CLT / Hypothesis tests I
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/7.MLE_LLN_CLT_hypothesis.pdf" style="     ">MLE,
+LLN, CLT / Hypothesis tests I</a>
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/7.hypothesis_tests_1.pdf" style="     ">Hyp.Test</a>
 </td>
 <td style="text-align:left;">
 </td>

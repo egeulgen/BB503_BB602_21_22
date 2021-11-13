@@ -32,6 +32,7 @@ sched_df$Subject[2] <- link_to_file(sched_df$Subject[2], "lectures/2.descriptive
 sched_df$Subject[3] <- link_to_file(sched_df$Subject[3], "lectures/3.probability.pdf")
 sched_df$Subject[4] <- link_to_file(sched_df$Subject[4], "lectures/4.discrete_distributions.pdf")
 sched_df$Subject[5] <- link_to_file(sched_df$Subject[5], "lectures/5.continuous_distributions.pdf")
+sched_df$Subject[7] <- link_to_file(sched_df$Subject[7], "lectures/7.MLE_LLN_CLT_hypothesis.pdf")
 
 
 # links to R exercises
@@ -41,6 +42,7 @@ sched_df$R[2] <- link_to_file("EDA", "scripts/2.EDA.pdf")
 sched_df$R[3] <- link_to_file("Basics", "scripts/3.basics.pdf")
 sched_df$R[4] <- link_to_file("Discrete RV", "scripts/4.discrete_distr.pdf")
 sched_df$R[5] <- link_to_file("Cont. RV", "scripts/5.cont_distr.pdf")
+sched_df$R[7] <- link_to_file("Hyp.Test", "scripts/7.hypothesis_tests_1.pdf")
 
 sched_df <- sched_df[, c(1:3, 5, 4)]
 
