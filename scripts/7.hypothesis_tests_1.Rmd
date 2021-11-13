@@ -1,0 +1,173 @@
+---
+title: "BB503/BB602 - R Training - Week VII"
+author: "Ege Ulgen"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# One-sample t-Test
+
+The dataset we'll use contains information on 78 people using one of three diets.
+
+```{r diet1}
+diet_df <- read.csv("../data/Diet_R.csv")
+
+head(diet_df)
+
+# turn categorical variables into factor
+diet_df$Diet <- as.factor(diet_df$Diet)
+diet_df$gender <- as.factor(diet_df$gender)
+
+# create new variable
+diet_df$Weight_Change <- diet_df$weight6weeks - diet_df$pre.weight
+
+summary(diet_df)
+```
+
+Let's look at the overall distribution of weight change and the distributions by Diet type:
+
+```{r diet2}
+# overall
+hist(diet_df$Weight_Change)
+boxplot(diet_df$Weight_Change)
+
+# by diet type
+boxplot(diet_df$Weight_Change~diet_df$Diet)
+```
+
+We can observe that `Weight_Change` seems to follow a normal distribution (we'll later learn how to test normality of a variable). Moreover, diet 3 seems to result in a higher decrease compared to diets 1 & 2. We'll test the difference between mean weight changes between diet 1 and 3 in the next section. For now, let's test whether the overall mean weight change is significantly different than -3.
+
+## 1. Check assumptions, determine $H_0$ and $H_a$, choose $\alpha$
+
+Inspecting the histogram of overall weight change, we concluded that it is normally-distributed.
+
+$H_0: \mu = -3$ and $H_a: \mu \neq -3$
+
+Let's choose $\alpha=0.05$
+
+## 2. Calculate the appropriate test statistic
+
+$$
+t_H = \frac{\bar{X} - \mu}{s / \sqrt{n}}
+$$
+
+```{r t_stat}
+t_stat <- (mean(diet_df$Weight_Change) - (-3)) / (sd(diet_df$Weight_Change) / sqrt(nrow(diet_df)))
+t_stat
+
+df <- nrow(diet_df) - 1
+```
+
+## 3. Calculate critical values/p value
+
+### Critical values
+
+```{r t_crit}
+C1 <- qt(0.05/2, df = df)
+C2 <- qt(1 - 0.05/2, df = df)
+C1; C2
+
+# t_H in rejection zone?
+t_stat < C1 | t_stat > C2
+```
+
+### p value
+
+```{r t_p}
+p_val <- 2 * (1 - pt(abs(t_stat), df = df))
+p_val
+```
+
+### Confidence Interval
+
+The 95% Confidence Interval for $\mu$:
+
+$$
+95\%\ CI = [\bar{X} + t_{\alpha/2} \frac{s}{\sqrt{n}},\ \bar{X} + t_{1- \alpha/2} \frac{s}{\sqrt{n}}]
+$$
+
+```{r t_CI}
+SE <- sd(diet_df$Weight_Change) / sqrt(nrow(diet_df))
+
+mean(diet_df$Weight_Change) + C1 * SE; mean(diet_df$Weight_Change) + C2 * SE
+```
+
+## 4. Decide whether to reject/fail to reject $H_0$
+
+-   The calculated test statistic falls within the rejection region
+
+-   p value \< $\alpha$
+
+We reject the null hypothesis.
+
+"With 95% confidence, there is enough evidence to say mean weight change is significantly different than 0."
+
+"The overall mean weight change was found to be significantly different than -3 (t-test p \< 0.001, 95% CI = \[-4.42, -3.27\])"
+
+### Using `t.test()`
+
+```{r t_test_r}
+?t.test
+t.test(diet_df$Weight_Change, mu = -3)
+
+# change mu
+t.test(diet_df$Weight_Change, mu = -4)
+
+# change alternative
+t.test(diet_df$Weight_Change, mu = -3, alternative = "less")
+
+# change conf. level
+t.test(diet_df$Weight_Change, mu = -3, conf.level = .99)
+```
+
+# Two-sample t-Test
+
+Let's test whether the mean weight changes of diet 1 and 3 are different.
+
+```{r 2sample}
+
+sub_df <- subset(diet_df, Diet %in% c(1, 3))
+
+### compare variances (F-test)
+var.test(sub_df$Weight_Change[sub_df$Diet == 1], sub_df$Weight_Change[sub_df$Diet == 3])
+# more compactly
+var.test(Weight_Change~Diet, data = sub_df)
+
+
+res <- t.test(Weight_Change~Diet, data = sub_df, var.equal = TRUE)
+res
+
+res$p.value
+res$conf.int
+res$estimate
+```
+
+# Paired t-Test
+
+A study tested whether cholesterol was reduced after using a certain brand of margarine as part of a low fat, low cholesterol diet. The subjects consumed on average 2.31g of the active ingredient, stanol easter, a day. This data set contains information on 18 people using margarine to reduce cholesterol over three time points.
+
+```{r paired1}
+chol_df <- read.csv("../data/Cholesterol_R.csv")
+head(chol_df, 3)
+
+# turn categorical variable into factor
+chol_df$Margarine <- as.factor(chol_df$Margarine)
+
+summary(chol_df)
+```
+
+For the overall data, let's compare whether there is a significant change between `Before` and `After8weeks`:
+
+```{r paired2}
+boxplot(chol_df$Before, chol_df$After8weeks)
+
+# check normality
+hist(chol_df$After8weeks - chol_df$Before)
+
+t.test(chol_df$After8weeks, chol_df$Before, paired = TRUE)
+
+t.test(chol_df$After8weeks - chol_df$Before)
+```
