@@ -70,7 +70,7 @@ C1 <- qt(0.05/2, df = df)
 C2 <- qt(1 - 0.05/2, df = df)
 C1; C2
 
-# t_H in rejection zone?
+# t_stat in rejection zone?
 t_stat < C1 | t_stat > C2
 ```
 
