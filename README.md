@@ -148,9 +148,11 @@ LLN, CLT / Hypothesis tests I</a>
 2021-11-25
 </td>
 <td style="text-align:left;">
-Hypothesis tests II
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/8.ANOVA_chi_squared.pdf" style="     ">Hypothesis
+tests II</a>
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/8.hypothesis_tests_2.pdf" style="     ">Hyp.Test</a>
 </td>
 <td style="text-align:left;">
 </td>
