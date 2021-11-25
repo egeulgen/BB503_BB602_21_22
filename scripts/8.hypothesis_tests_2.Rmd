@@ -29,18 +29,18 @@ summary(diet_df)
 boxplot(diet_df$Weight_Change~diet_df$Diet)
 ```
 
-Let's test the hypothesis that at least one of the mean weight changes is diffent from the others between the three diets.
+Let's test the hypothesis that at least one of the mean weight changes is different from the others between the three diets.
 
 ## 1. Check assumptions, determine $H_0$ and $H_a$, choose $\alpha$
 
 Inspecting the histograms of weight change by diet, we conclude that they are normally-distributed:
 
 ```{r aov_norm}
-par(mfow = c(1, 3))
+par(mfrow = c(1, 3))
 hist(diet_df$Weight_Change[diet_df$Diet == 1])
 hist(diet_df$Weight_Change[diet_df$Diet == 2])
 hist(diet_df$Weight_Change[diet_df$Diet == 3])
-par(mfow = c(1, 1))
+par(mfrow = c(1, 1))
 ```
 
 $H_0: \mu_1 = \mu_2 = \mu_3$ and $H_a:$ at least one mean is different
@@ -92,6 +92,7 @@ MSE_wi <- SS_wi / df_wi
 
 ```{r aov_f}
 F_stat <- MSE_bw / MSE_wi
+F_stat
 ```
 
 ```{r aov_tbl}
@@ -128,7 +129,7 @@ We reject the null hypothesis.
 
 "With 95% confidence, there is enough evidence to say that at least one of the mean weight changes is significantly different than the others."
 
-"The overall mean weight change was found to be significantly different between diets (ANOVA p = 0.003)"
+"The overall mean weight change was found to be significantly different between diets (ANOVA, p = 0.003)"
 
 ### Using `aov()`
 
