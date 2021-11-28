@@ -165,12 +165,14 @@ tests II</a>
 2021-12-02
 </td>
 <td style="text-align:left;">
-Hypothesis tests III / Multiple testing correction
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/9.nonparametric_multiple_testing.pdf" style="     ">Hypothesis
+tests III / Multiple testing correction</a>
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/9.hypothesis_tests_3.pdf" style="     ">Hyp.Test</a>
 </td>
 <td style="text-align:left;">
-HW2
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/Homeworks/HW2.pdf" style="     ">HW2</a>
 </td>
 </tr>
 <tr>
