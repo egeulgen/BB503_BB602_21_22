@@ -30,6 +30,12 @@ par(mfrow = c(1, 1))
 ## Quantile-Quantile Plot
 
 ```{r qqplot}
+# manually
+emp_vals <- sort(norm_df$normal_example)
+theor_quants <- qnorm((seq_along(emp_vals) - .5) / length(emp_vals))
+plot(theor_quants, emp_vals)
+
+# using base R function 'qqnorm' 
 par(mfrow = c(1, 2))
 qqnorm(norm_df$normal_example)
 qqline(norm_df$normal_example)
@@ -38,6 +44,7 @@ qqnorm(norm_df$skewed_example)
 qqline(norm_df$skewed_example)
 par(mfrow = c(1, 1))
 
+# using 'ggqqplot' from 'ggpubr'
 # install.packages("ggpubr")
 library(ggpubr)
 
@@ -45,13 +52,32 @@ ggqqplot(norm_df, "normal_example")
 ggqqplot(norm_df, "skewed_example")
 ```
 
-## Shapiro–Wilk Test of Normality
+## Shapiro--Wilk Test of Normality
 
 $H_0:\ the\ population\ is\ normally\ distributed$
 
 ```{r shapiro}
 shapiro.test(norm_df$normal_example)
 shapiro.test(norm_df$skewed_example)
+```
+
+## Kolmogorov-Smirnov Tests
+
+```{r KS0, echo=FALSE}
+x <- norm_df$skewed_example
+plot(seq(0, 10, .1), pnorm(seq(0, 10, .1), mean = 2, sd = 4), type = "l", lwd = 2, col = "red", ylab = "Cumulative Probability", xlab = "")
+lines( sort(x), (1:length(x))/length(x), type="s", lwd = 1.5, col = "blue")
+
+```
+
+```{r KS1}
+# does x come from the selected distribution with the specified parameters?
+ks.test(norm_df$normal_example, pnorm, mean = mean(norm_df$normal_example), sd = sd(norm_df$normal_example))
+```
+
+```{r KS2}
+# Do x and y come from the same distribution?
+ks.test(norm_df$normal_example, norm_df$skewed_example)
 ```
 
 # Non-parametric Tests
