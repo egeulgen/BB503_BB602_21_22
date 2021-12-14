@@ -1,0 +1,407 @@
+---
+title: "BB503/BB602 - R Training - Week XI"
+author: "Ege Ulgen"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Power Analysis/Sample Size Calculation
+
+```{r pwr1}
+# install.packages("pwr")
+library(pwr)
+
+### Effect size: magnitude of the effect under the alternative hypothesis
+# The larger the effect size, the easier it is to detect an effect and require fewer samples
+### Power: probability of correctly rejecting the null hypothesis if it is false
+# The higher the power, the more likely it is to detect an effect if it is present and the more samples needed
+# Standard setting for power is 0.80
+### Significance level (alpha): probability of falsely rejecting the null hypothesis even though it is true
+# The lower the significance level, the more likely it is to avoid a false positive and
+# the more samples needed
+# Standard setting for alpha is 0.05
+
+### Correlation
+?pwr.r.test
+# r=correlation
+# sig.level=significant level
+# power=power of test
+
+# effect size >>> 0.1=small, 0.3=medium, and 0.5 large
+
+# Is there a correlation between hours studied and test score?
+# assuming large correlation
+pwr.r.test(r=0.5, sig.level=0.05, power=0.80)
+
+# calculating power
+pwr.r.test(n = 50, r=0.5, sig.level=0.05)
+pwr.r.test(n = 10, r=0.5, sig.level=0.05)
+
+
+### Two-sample t-test
+?pwr.t.test
+# d=effect size
+# sig.level=significant level
+# power=power of test
+# type=type of test
+
+# effect size >>> 0.2=small, 0.5=medium, and 0.8 large
+# effect size calculation >>> Cohen's D
+
+# Are the average body temperatures of women and men different?
+# assuming medium effect size
+pwr.t.test(d=0.5, sig.level=0.05, power=0.80, type="two.sample", alternative="two.sided")
+
+# small effect size
+pwr.t.test(d=0.2, sig.level=0.05, power=0.80, type="two.sample", alternative="two.sided")
+
+# large effect size
+pwr.t.test(d=0.8, sig.level=0.05, power=0.80, type="two.sample", alternative="two.sided")
+
+
+# Is the average body temperature higher in women than in men?
+pwr.t.test(d=0.5, sig.level=0.05, power=0.80, type="two.sample", alternative="greater")
+
+### One-way ANOVA
+?pwr.anova.test
+# k=number of groups
+# f=effect size
+# sig.level=significant level
+# power=power of test
+
+
+# effect size >>> 0.1=small, 0.25=medium, and 0.4 large
+
+# Is there a difference in disease incidence across 6 different cities?
+# assuming small effect size
+pwr.anova.test(k = 6 , f = 0.1 , sig.level = 0.05 , power = 0.80)
+
+
+### Chi-squared test
+?pwr.chisq.test
+# w=effect size
+# df=degrees of freedom
+# sig.level=significant level
+# power=power of test
+
+
+# effect size >>> 0.1=small, 0.3=medium, and 0.5 large
+
+
+# Does the observed proportions of phenotypes from a genetics experiment different from the expected 9:3:3:1?
+
+# aassuming medium effect
+# df = 4 (phenotypes) – 1 = 3
+pwr.chisq.test(w=0.3, df=3, sig.level=0.05, power=0.80)
+
+
+### Linear Regression
+?pwr.f2.test
+# u=numerator degrees of freedom
+# v=denominator degrees of freedom
+# f2=effect size
+# sig.level=significant level
+# power=power of test
+
+# effect size >>> 0.02=small, 0.15=medium, and 0.35 large
+
+# Can height, age, and time spent at the gym, predict weight in adult males?
+# assuming medium effect size
+(res <- pwr.f2.test(u = 3, f2 = 0.15, sig.level = 0.05, power = 0.8))
+res$v + 4 #(tot. num. of variables)### Correlation
+?pwr.r.test
+# r=correlation
+# sig.level=significant level
+# power=power of test
+
+# effect size >>> 0.1=small, 0.3=medium, and 0.5 large
+
+# Is there a correlation between hours studied and test score?
+# assuming large correlation
+pwr.r.test(r=0.5, sig.level=0.05, power=0.80)
+
+# calculating power
+pwr.r.test(n = 50, r=0.5, sig.level=0.05)
+pwr.r.test(n = 10, r=0.5, sig.level=0.05)
+
+
+### Two-sample t-test
+?pwr.t.test
+# d=effect size
+# sig.level=significant level
+# power=power of test
+# type=type of test
+
+# effect size >>> 0.2=small, 0.5=medium, and 0.8 large
+# effect size calculation >>> Cohen's D
+
+# Are the average body temperatures of women and men different?
+# assuming medium effect size
+pwr.t.test(d=0.5, sig.level=0.05, power=0.80, type="two.sample", alternative="two.sided")
+
+# small effect size
+pwr.t.test(d=0.2, sig.level=0.05, power=0.80, type="two.sample", alternative="two.sided")
+
+# large effect size
+pwr.t.test(d=0.8, sig.level=0.05, power=0.80, type="two.sample", alternative="two.sided")
+
+
+# Is the average body temperature higher in women than in men?
+pwr.t.test(d=0.5, sig.level=0.05, power=0.80, type="two.sample", alternative="greater")
+
+### One-way ANOVA
+?pwr.anova.test
+# k=number of groups
+# f=effect size
+# sig.level=significant level
+# power=power of test
+
+
+# effect size >>> 0.1=small, 0.25=medium, and 0.4 large
+
+# Is there a difference in disease incidence across 6 different cities?
+# assuming small effect size
+pwr.anova.test(k = 6 , f = 0.1 , sig.level = 0.05 , power = 0.80)
+
+
+### Chi-squared test
+?pwr.chisq.test
+# w=effect size
+# df=degrees of freedom
+# sig.level=significant level
+# power=power of test
+
+
+# effect size >>> 0.1=small, 0.3=medium, and 0.5 large
+
+
+# Does the observed proportions of phenotypes from a genetics experiment different from the expected 9:3:3:1?
+
+# aassuming medium effect
+# df = 4 (phenotypes) – 1 = 3
+pwr.chisq.test(w=0.3, df=3, sig.level=0.05, power=0.80)
+
+
+### Linear Regression
+?pwr.f2.test
+# u=numerator degrees of freedom
+# v=denominator degrees of freedom
+# f2=effect size
+# sig.level=significant level
+# power=power of test
+
+# effect size >>> 0.02=small, 0.15=medium, and 0.35 large
+
+# Can height, age, and time spent at the gym, predict weight in adult males?
+# assuming medium effect size
+(res <- pwr.f2.test(u = 3, f2 = 0.15, sig.level = 0.05, power = 0.8))
+res$v + 4 #(tot. num. of variables)
+```
+
+# Linear Regression
+
+## Rationale
+
+We'll use the pre/post dataset for this exercise. This dataset contains simulated data for pre-intervention measurements (`pre`) for 20 individuals together with their post-intervention measurements (`post`).
+
+```{r data}
+pre_post_df <- read.csv("../data/pre_post_data.csv")
+dim(pre_post_df)
+head(pre_post_df, 3)
+```
+
+Let's visualize the scatter plot to investigate any relationship between `pre` and `post` measurements:
+
+```{r scatter}
+plot(post~pre, data = pre_post_df)
+```
+
+Using the function `abline()`, we can add different lines, where the argument `b` is the slope and `a` is the intercept
+
+```{r lines}
+plot(post~pre, data = pre_post_df)
+# y = bx + a
+abline(a = .4, b = .5, col = 1)
+abline(a = .4, b = .7, col = 2)
+abline(a = .4, b = 1, col = 3)
+abline(a = .4, b = 2, col = 4)
+
+legend("topleft", legend = c(.5, .7, 1, 2), title = "b", col = 1:4, cex = 1.2, bty = "n", lty = 1)
+```
+
+Our aim is to minimize the distance to the line (residuals = errors):
+
+```{r resid}
+plot_residual_dist <- function(df, b, a =.4, col = 1) {
+    plot(post~pre, data = df, main = paste0("b=", b))
+    abline(a = a, b = b, col = col)
+    segments(x0 = df$pre, y0 = df$post, x1 = df$pre, y1 = b * df$pre + a, col = "red")
+}
+
+par(mfrow = c(2, 2))
+plot_residual_dist(pre_post_df, .5)
+plot_residual_dist(pre_post_df, .7)
+plot_residual_dist(pre_post_df, 1)
+plot_residual_dist(pre_post_df, 2)
+par(mfrow = c(1, 1))
+```
+
+The residuals should be around 0:
+
+```{r residuals2}
+plot_residual_vals <- function(df, b, a = .4) {
+    preds <- b * df$pre + a
+    res <- df$post - preds
+    tmp <- round(max(abs(res)))
+    plot(1:nrow(df), res, ylim = c(-tmp, tmp), main = paste0("b=", b))
+    abline(h = 0, col = "red", lty = 2)
+}
+
+par(mfrow = c(2, 2))
+plot_residual_vals(pre_post_df, 0.5)
+plot_residual_vals(pre_post_df, 0.7)
+plot_residual_vals(pre_post_df, 1)
+plot_residual_vals(pre_post_df, 2)
+par(mfrow = c(1, 1))
+```
+
+## Examples
+
+### Simple Linear Regression
+
+```{r simple}
+fit_simple <- lm(post~pre, pre_post_df)
+summary(fit_simple)
+
+# prediction
+new_data <- data.frame(pre = c(3.2, 1.8, 8.2))
+predict(fit_simple, new_data)
+```
+
+### Multiple Linear Regression
+
+We'll use the prostate cancer dataset for this exercise. The main aim of collecting this data set was to inspect the associations between prostate-specific antigen (PSA) and prognostic clinical measurements in men with advanced prostate cancer. Data were collected on 97 men who were about to undergo radical prostectomies.
+
+```{r psa_data}
+prca_df <- read.csv("../data/prostate_cancer.csv")
+
+dim(prca_df)
+head(prca_df, 3)
+
+# turn categorical variables into factors
+prca_df$invasion <- as.factor(prca_df$invasion)
+prca_df$Gleason <- as.factor(prca_df$Gleason)
+
+summary(prca_df)
+
+## check normality of dependent variable
+library(ggpubr)
+ggqqplot(prca_df$PSA)
+# the data quantiles deviates from the normal distribution quantiles
+shapiro.test(prca_df$PSA)
+
+# For this reason, take the natural log values of the PSA levels, and again test for normality
+prca_df$log_PSA <- log(prca_df$PSA)
+ggqqplot(prca_df$log_PSA)
+shapiro.test(prca_df$log_PSA)
+```
+
+Let's check the effect of `Gleason` score on log(PSA) levels:
+
+```{r lm2}
+fit_gleason <- lm(log_PSA~Gleason, data = prca_df)
+summary(fit_gleason)
+
+# change reference level
+?relevel()
+prca_df$Gleason
+prca_df$Gleason <- relevel(prca_df$Gleason, ref = "7")
+prca_df$Gleason
+
+fit_gleason2 <- lm(log_PSA~Gleason, data = prca_df)
+summary(fit_gleason2)
+
+prca_df$Gleason <- relevel(prca_df$Gleason, ref = "6")
+```
+
+Let's adjust for `age`:
+
+```{r lm3}
+fit_gleason3 <- lm(log_PSA~Gleason + age, data = prca_df)
+summary(fit_gleason3)
+
+fit_gleason4 <- lm(log_PSA~Gleason + I(age - min(age)), data = prca_df)
+summary(fit_gleason4)
+
+fit_gleason5 <- lm(log_PSA~Gleason * age, data = prca_df)
+summary(fit_gleason5)
+```
+
+-   the effect of age when (Gleason score = 6) = 0.0351
+-   the effect of age when (Gleason score = 7) = 0.0351 + (-0.0177)
+-   the effect of age when (Gleason score = 8) = 0.0351 + (-0.0704)
+
+What are important factors that have an effect on PSA levels?
+
+```{r lm4}
+fit0 <- lm(log_PSA~vol + wt + age + BPH + invasion + penetration + Gleason, data = prca_df)
+summary(fit0)
+
+# equivalently
+prca_df2 <- prca_df
+prca_df2$PSA <- NULL
+fit0 <- lm(log_PSA~., data = prca_df2)
+summary(fit0)
+
+## keeping only significant variables, fit final model
+fit1 <- lm(log_PSA~vol + BPH + invasion + Gleason, data = prca_df)
+summary(fit1)
+
+# prediction
+new_data <- data.frame(vol = 0.42, BPH = 1.8, invasion = "1", Gleason = "6")
+predict(fit1, new_data)
+```
+
+## Model Diagnostics
+
+For detailed information, read this article on STHDA: <http://sthda.com/english/articles/39-regression-model-diagnostics/161-linear-regression-assumptions-and-diagnostics-in-r-essentials/>
+
+Let's evaluate the diagnostic plots for the initial simple linear regression model `fit_simple`:
+
+```{r diag_plots}
+par(mfrow = c(2, 2))
+plot(fit_simple)
+par(mfrow = c(1, 1))
+```
+
+### Residuals vs Fitted
+
+Used to check the linear relationship assumptions. A horizontal line, without distinct patterns is an indication for a linear relationship. In this case, there is a slight deviation, which is an issue.
+
+### Normal Q-Q
+
+Used to examine whether the residuals are normally distributed.
+
+### Scale-Location (or Spread-Location)
+
+Used to check the homogeneity of variance of the residuals (homoscedasticity). Horizontal line with equally spread points is a good indication of homoscedasticity. In this case, there seems to be a heteroscedasticity issue.
+
+### Residuals vs. Leverage
+
+Used to identify influential cases, that is extreme values that might influence the regression results when included or excluded from the analysis
+
+-   Standardized residual: the residual divided by its estimated standard error. Standardized residuals can be interpreted as the number of standard errors away from the regression line. Observations whose standardized residuals are greater than 3 in absolute value are possible outliers
+-   Leverage: A data point has high leverage, if it has extreme predictor x values
+
+Outlying values are generally located at the upper right corner or at the lower right corner. Those spots are the places where data points can be influential against a regression line.
+
+### Cook's Distance
+
+This metric defines influence as a combination of leverage and residual size .
+
+```{r cooks}
+plot(fit_simple, 4)
+```
