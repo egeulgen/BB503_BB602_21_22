@@ -198,9 +198,11 @@ Midterm Exam 2
 2021-12-16
 </td>
 <td style="text-align:left;">
-Power Analysis, Missing data / Linear regression
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/11.Missing_power_linear_regression.pdf" style="     ">Power
+Analysis, Missing data / Linear regression</a>
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/11.linear_regression.pdf" style="     ">Lin.Regr.</a>
 </td>
 <td style="text-align:left;">
 </td>
