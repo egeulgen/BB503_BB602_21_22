@@ -24,6 +24,8 @@ library(pwr)
 # the more samples needed
 # Standard setting for alpha is 0.05
 
+?cor.test
+
 ### Correlation
 ?pwr.r.test
 # r=correlation
@@ -222,7 +224,7 @@ plot(post~pre, data = pre_post_df)
 Using the function `abline()`, we can add different lines, where the argument `b` is the slope and `a` is the intercept
 
 ```{r lines}
-plot(post~pre, data = pre_post_df)
+plot(post~pre, data = pre_post_df, xlim = c(0, 9), ylim = c(0, 10))
 # y = bx + a
 abline(a = .4, b = .5, col = 1)
 abline(a = .4, b = .7, col = 2)
@@ -351,9 +353,7 @@ fit0 <- lm(log_PSA~vol + wt + age + BPH + invasion + penetration + Gleason, data
 summary(fit0)
 
 # equivalently
-prca_df2 <- prca_df
-prca_df2$PSA <- NULL
-fit0 <- lm(log_PSA~., data = prca_df2)
+fit0 <- lm(log_PSA~. - PSA, data = prca_df)
 summary(fit0)
 
 ## keeping only significant variables, fit final model
