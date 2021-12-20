@@ -202,7 +202,7 @@ Midterm Exam 2
 Analysis, Missing data / Linear regression</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/11.linear_regression.pdf" style="     ">Lin.Regr.</a>
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/12.glm.pdf" style="     ">GLM.</a>
 </td>
 <td style="text-align:left;">
 </td>
@@ -215,7 +215,8 @@ Analysis, Missing data / Linear regression</a>
 2021-12-23
 </td>
 <td style="text-align:left;">
-Generalized linear models
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/12.glm.pdf" style="     ">Generalized
+linear models</a>
 </td>
 <td style="text-align:left;">
 </td>
