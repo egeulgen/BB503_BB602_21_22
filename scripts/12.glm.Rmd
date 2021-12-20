@@ -1,0 +1,110 @@
+---
+title: "BB503/BB602 - R Training - Week XII"
+author: "Ege Ulgen"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Logistic Regression
+
+The data we'll use is `birthwt` from the `MASS` package. The `birthwt` data frame has 189 rows and 10 columns. The data were collected at Baystate Medical Center, Springfield, Mass during 1986.
+
+```{r data}
+# install.packages("MASS")
+library(MASS)
+
+data(birthwt) 
+?birthwt
+
+dim(birthwt)
+
+head(birthwt)
+
+# turn categorical variables into factor
+birthwt$low <- as.factor(birthwt$low)
+birthwt$race <- as.factor(birthwt$race)
+birthwt$smoke <- as.factor(birthwt$smoke)
+birthwt$ht <- as.factor(birthwt$ht)
+birthwt$ui <- as.factor(birthwt$ui)
+
+summary(birthwt)
+```
+
+We'll be using logistic regression to identify risk factors associated with low infant birth weight (birth weight less than 2.5 kg).
+
+```{r lr1}
+fit0 <- glm(low~.-bwt, data = birthwt, family = binomial)
+summary(fit0)
+```
+
+We'll use only the significant variables:
+
+```{r lr2}
+fit1 <- glm(low~lwt + race + smoke + ht, data = birthwt, family = binomial)
+summary(fit1)
+```
+
+The final model:
+
+```{r lr3}
+fit_final <- glm(low~I(lwt - min(lwt)) + race + smoke + ht, data = birthwt, family = binomial)
+summary(fit_final)
+```
+
+```{r lr_coef}
+coef(fit_final)
+
+# OR
+exp(coef(fit_final))[-1]
+
+# % change in odds
+(exp(coef(fit_final)) - 1)[-1] * 100 
+```
+
+```{r lr_vis}
+# install.packages("sjPlot")
+sjPlot::plot_model(fit_final)
+```
+
+# Poisson Regression
+
+The data we'll use is `epilepsy` from the `HSAUR` package. The dataset is for a randomized clinical trial investigating the effect of an anti-epileptic drug (Progabide).
+
+```{r poi_data}
+# install.packages("HSAUR")
+library(HSAUR)
+?epilepsy
+
+data("epilepsy")
+
+dim(epilepsy)
+head(epilepsy)
+
+summary(epilepsy)
+```
+
+We'll only inspect period 4:
+
+```{r subset}
+epilepsy4 <- epilepsy[epilepsy$period == 4, ]
+
+boxplot(epilepsy4$seizure.rate~epilepsy4$treatment)
+```
+
+Let's inspect the effect of treatment adjusting for `base` and `age`:
+
+```{r pois_model}
+fit_pois <- glm(seizure.rate ~ treatment + I(base - min(base)) + I(age - min(age)), data = epilepsy4, family = poisson)
+summary(fit_pois)
+```
+
+```{r pois_interpret}
+(exp(coef(fit_pois)[-1]) - 1) * 100
+```
+
+```{r pois_vis}
+sjPlot::plot_model(fit_pois)
+```
