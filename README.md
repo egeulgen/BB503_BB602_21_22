@@ -240,11 +240,41 @@ HW3
 </td>
 </tr>
 <tr>
-<td style="text-align:right;font-weight: bold;background-color: #E2725A !important;">
+<td style="text-align:right;">
 14
 </td>
+<td style="text-align:left;">
+2021-01-06
+</td>
+<td style="text-align:left;">
+No lecture
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+2021-01-13
+</td>
+<td style="text-align:left;">
+Review before final
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;background-color: #E2725A !important;">
+16
+</td>
 <td style="text-align:left;font-weight: bold;background-color: #E2725A !important;">
-2022-01-06
+2021-01-20
 </td>
 <td style="text-align:left;font-weight: bold;background-color: #E2725A !important;">
 Final Exam
