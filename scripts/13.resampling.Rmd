@@ -1,0 +1,202 @@
+---
+title: "BB503/BB602 - R Training - Week XIII"
+author: "Ege Ulgen"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Simulated Data
+
+Consider the following linear regression model:
+
+$$Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{1i}X_{2i} + Z_i$$
+
+We'll simulate Y values for n = 1000 subjects using the following configuration:
+
+-   $\beta_0=1$, $\beta_1=0.8$, $\beta_2=-1$, $\beta_3=0.3$
+-   $X_{1i} \sim Normal(20, 5)$
+-   $X_{2i} \sim Bernoullu(p=0.45)$
+-   $Z_i \sim N(0, 0.5)$
+
+```{r simulation}
+n <- 1000
+
+B0 <- 1
+B1 <- 0.8
+B2 <- -1
+B3 <- 0.3
+
+set.seed(123)
+X1 <- rnorm(n, mean = 20, sd = sqrt(5))
+X2 <- sample(c(0, 1), size = n, replace = TRUE)
+Z <- rnorm(n, mean = 0, sd = sqrt(0.5))
+
+Y_sim <- B0 + B1 * X1 + B2 * X2 + B3 * X1 * X2 + Z
+
+simulated_df <- data.frame(Y = Y_sim, X1 = X1, X2 = X2)
+```
+
+We'll compare the estimated mean squared errors (MSEs) for two models (below) using 3 different approaches:
+
+$$Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{1i}X_{2i} + Z_i$$
+
+$$Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + Z_i$$
+
+## The holdout method
+
+```{r holdout}
+set.seed(123)
+train_idx <- sample(1:nrow(simulated_df), nrow(simulated_df) * .8)
+
+train_df <- simulated_df[train_idx, ]
+test_df <- simulated_df[-train_idx, ]
+
+# fit model on training
+fit1 <- lm(Y ~ X1 + X2, data = train_df)
+fit2 <- lm(Y ~ X1 + X2 + X1 * X2, data = train_df)
+
+# predict on test
+preds1 <- predict(fit1, newdata = test_df)
+preds2 <- predict(fit2, newdata = test_df)
+# calculate MSE
+MSE_holdout1 <- mean((test_df$Y - preds1) ^ 2)
+MSE_holdout2 <- mean((test_df$Y - preds2) ^ 2)
+```
+
+## K-Fold Cross Validation
+
+```{r kfold}
+### 10-fold CV
+K <- 10
+set.seed(123)
+# shuffle
+idx <- sample(1:n, n)
+kfold_df <- simulated_df[idx, ]
+kfold_df <- cbind(kfold_df, fold = rep(1:K, each = 1000 / K))
+
+all_MSE_kfold1 <- all_MSE_kfold2 <- c()
+for (i in 1:K) {
+    train_df <- kfold_df[kfold_df$fold != i, ]
+    test_df <- kfold_df[kfold_df$fold == i, ]
+    
+    # fit model on training
+    fit1 <- lm(Y ~ X1 + X2, data = train_df)
+    fit2 <- lm(Y ~ X1 + X2 + X1 * X2, data = train_df)
+    
+    # predict on test
+    preds1 <- predict(fit1, newdata = test_df)
+    preds2 <- predict(fit2, newdata = test_df)
+    # calculate MSE
+    MSE1 <- mean((test_df$Y - preds1)^2)
+    MSE2 <- mean((test_df$Y - preds2)^2)
+    all_MSE_kfold1 <- c(all_MSE_kfold1, MSE1)
+    all_MSE_kfold2 <- c(all_MSE_kfold2, MSE2)
+}
+MSE_kfold1 <- mean(all_MSE_kfold1)
+MSE_kfold2 <- mean(all_MSE_kfold2)
+```
+
+## Leave-one-out Cross Validation (LOOCV)
+
+```{r LOOCV}
+### =1000-fold CV
+K <- nrow(simulated_df)
+set.seed(123)
+# shuffle
+idx <- sample(1:n, n)
+LOO_df <- simulated_df[idx, ]
+LOO_df <- cbind(LOO_df, fold = rep(1:K, each = 1000 / K))
+
+all_MSE_LOO1 <- all_MSE_LOO2 <- c()
+for (i in 1:K) {
+    train_df <- LOO_df[LOO_df$fold != i, ]
+    test_df <- LOO_df[LOO_df$fold == i, ]
+    
+    # fit model on training
+    fit1 <- lm(Y ~ X1 + X2, data = train_df)
+    fit2 <- lm(Y ~ X1 + X2 + X1 * X2, data = train_df)
+    
+    # predict on test
+    preds1 <- predict(fit1, newdata = test_df)
+    preds2 <- predict(fit2, newdata = test_df)
+    # calculate MSE
+    MSE1 <- mean((test_df$Y - preds1) ^ 2)
+    MSE2 <- mean((test_df$Y - preds2) ^ 2)
+    all_MSE_LOO1 <- c(all_MSE_LOO1, MSE1)
+    all_MSE_LOO2 <- c(all_MSE_LOO2, MSE2)
+}
+MSE_LOO1 <- mean(all_MSE_LOO1)
+MSE_LOO2 <- mean(all_MSE_LOO2)
+```
+
+## Final Comparison
+
+```{r final_comp}
+# Model 1
+MSE_holdout1; MSE_kfold1; MSE_LOO1
+# Model 2
+MSE_holdout2; MSE_kfold2; MSE_LOO2
+```
+
+# The bootstrap
+
+```{r bootstrap}
+### Bootstrap estimate of correlation betwen PSA and vol, median PSA, median vol
+prca_df <- read.csv("../data/prostate_cancer.csv")
+
+library(boot)
+
+boot_func <- function(data, indices, cor.type = "spearman"){
+  dt <- data[indices,]
+  res <- c(cor(dt[, 1], dt[,2], method=cor.type),
+           median(dt[,1]),
+           median(dt[,2]))
+  return(res)
+}
+
+bs_res <- boot(prca_df, boot_func, R = 10000)
+bs_res
+
+# bootstrap realizations
+head(bs_res$t)
+# bias
+colMeans(bs_res$t)
+colMeans(bs_res$t) - bs_res$t0
+# SE
+apply(bs_res$t, 2, sd)
+
+## distribution of realizations
+plot(bs_res, index = 1)
+plot(bs_res, index = 2)
+plot(bs_res, index = 3)
+
+?boot.ci
+boot.ci(bs_res, index = 1, type = "basic")
+```
+
+```{r bstrap2}
+### Bootstrap estimate of adjusted R squared for the multiple regression model from week 11
+prca_df$PSA <- log(prca_df$PSA)
+
+prca_df$Gleason <- as.factor(prca_df$Gleason)
+prca_df$invasion <- as.factor(prca_df$invasion)
+
+boot_func2 <- function(data, indices, cor.type = "spearman"){
+    dt <- data[indices,]
+    tmp <- lm(dt[, 1] ~ dt[, 2] + dt[, 5] + dt[, 6] + dt[, 8])
+    tmp <- summary(tmp)
+    res <- tmp$adj.r.squared
+    return(res)
+}
+
+bs_res <- boot(prca_df, boot_func2, R = 5000)
+bs_res
+
+## distribution of realizations
+plot(bs_res)
+
+boot.ci(bs_res, index = 1)
+```
