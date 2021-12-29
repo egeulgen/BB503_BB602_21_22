@@ -202,7 +202,7 @@ Midterm Exam 2
 Analysis, Missing data / Linear regression</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/12.glm.pdf" style="     ">GLM.</a>
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/11.linear_regression.pdf" style="     ">Lin.Regr.</a>
 </td>
 <td style="text-align:left;">
 </td>
@@ -219,6 +219,7 @@ Analysis, Missing data / Linear regression</a>
 linear models</a>
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/12.glm.pdf" style="     ">GLM</a>
 </td>
 <td style="text-align:left;">
 </td>
@@ -231,9 +232,11 @@ linear models</a>
 2021-12-30
 </td>
 <td style="text-align:left;">
-Resampling Methods
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/lectures/13.resampling.pdf" style="     ">Resampling
+Methods</a>
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/egeulgen/BB503_BB602_21_22/blob/main/scripts/13.resampling.pdf" style="     ">resampling</a>
 </td>
 <td style="text-align:left;">
 HW3
