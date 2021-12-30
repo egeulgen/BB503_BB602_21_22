@@ -17,8 +17,8 @@ $$Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{1i}X_{2i} + Z_i$$
 We'll simulate Y values for n = 1000 subjects using the following configuration:
 
 -   $\beta_0=1$, $\beta_1=0.8$, $\beta_2=-1$, $\beta_3=0.3$
--   $X_{1i} \sim Normal(20, 5)$
--   $X_{2i} \sim Bernoullu(p=0.45)$
+-   $X_{1} \sim Normal(20, 5)$
+-   $X_{2} \sim Bernoulli(p=0.5)$
 -   $Z_i \sim N(0, 0.5)$
 
 ```{r simulation}
@@ -61,6 +61,7 @@ fit2 <- lm(Y ~ X1 + X2 + X1 * X2, data = train_df)
 # predict on test
 preds1 <- predict(fit1, newdata = test_df)
 preds2 <- predict(fit2, newdata = test_df)
+
 # calculate MSE
 MSE_holdout1 <- mean((test_df$Y - preds1) ^ 2)
 MSE_holdout2 <- mean((test_df$Y - preds2) ^ 2)
@@ -184,7 +185,7 @@ prca_df$PSA <- log(prca_df$PSA)
 prca_df$Gleason <- as.factor(prca_df$Gleason)
 prca_df$invasion <- as.factor(prca_df$invasion)
 
-boot_func2 <- function(data, indices, cor.type = "spearman"){
+boot_func2 <- function(data, indices){
     dt <- data[indices,]
     tmp <- lm(dt[, 1] ~ dt[, 2] + dt[, 5] + dt[, 6] + dt[, 8])
     tmp <- summary(tmp)
